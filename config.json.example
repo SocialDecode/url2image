@@ -1,0 +1,10 @@
+{
+	"port" : 80,
+	"ttl"  : 86400,
+	"webshotOptions" : {
+		"renderDelay" : 2000,
+		"defaultWhiteBackground" : true,
+		"streamType" : "jpg",
+		"quality" : 80
+	}
+}
