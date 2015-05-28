@@ -11,7 +11,7 @@ garbageCollect = ->
 	now = ~~(new Date().getTime()/1000)
 	for file in files
 		stats = fs.statSync __dirname+'/cache/'+file
-		if ~~(stats.birthtime.getTime()/1000)+config.ttl < now
+		if ~~(stats.ctime.getTime()/1000)+config.ttl < now
 			fs.unlinkSync __dirname+'/cache/'+file
 
 renderFile = (imageName,res)->
