@@ -17,7 +17,7 @@ garbageCollect = ->
 renderFile = (imageName,res)->
 	img = fs.readFileSync __dirname+'/cache/'+imageName
 	garbageCollect()
-	res.writeHead 200, {'Content-Type':'image/jpg'}
+	res.writeHead 200, {'Content-Type':'image/'+options.streamType}
 	res.end img, 'binary'
 	return
 
@@ -29,16 +29,16 @@ server = http.createServer (req,res)->
 		return
 
 	name = crypto.createHash('md5').update(url).digest('hex')
-	if fs.existsSync(__dirname+'/cache/'+name+'.jpg')
-		renderFile name+'.jpg',res
+	if fs.existsSync(__dirname+'/cache/'+name+'.'+options.streamType)
+		renderFile name+'.'+options.streamType,res
 	else
-		webshot url, __dirname+'/cache/'+name+'.jpg', options, (err)->
+		webshot url, __dirname+'/cache/'+name+'.'+options.streamType, options, (err)->
 			if err
 				console.log err
 				res.writeHead 500
 				res.end 'Error getting thumbnail'
 			else
-				renderFile name+'.jpg',res
+				renderFile name+'.'+options.streamType,res
 
 
 
